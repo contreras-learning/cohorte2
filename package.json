@@ -1,0 +1,23 @@
+{
+  "name": "ejemplo_nodejs_bictia",
+  "version": "0.0.1",
+  "description": "Esta es una descripción de mi proyecto, la aplicación es una prueba",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "open": "start http://localhost"
+  },
+  "keywords": [
+    "ejemplo",
+    "bictia",
+    "clase",
+    "nodejs",
+    "prueba"
+  ],
+  "author": "Jorge Iván Andrés Contreras Pereira",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
