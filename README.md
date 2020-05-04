@@ -1,1 +1,2 @@
-# cohorte2
+# Códigos de ejemplo realizados durante la clase
+
