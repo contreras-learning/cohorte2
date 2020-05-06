@@ -2,52 +2,97 @@ module.exports = function (db) {
     const express = require('express');
     const router = express.Router();
     const TABLE = 'classes';
+    let model = require('../models/sqlite-model')(db);
 
-    //{{SERVER}}/classes/create_users
 
-    router.get('/initialize', function (request, response) {
-        db.serialize(function () {
-            db.run('CREATE TABLE IF NOT EXISTS '+TABLE+' (name TEXT, id_number INT, classroom TEXT)');
-            response.send('Inicializada');
-        });
-    });
-
-    //{{SERVER}}/classes/delete_users
-    router.get('/clean', function (request, response) {
-        db.serialize(function () {
-            db.run('DROP TABLE IF EXISTS '+TABLE);
-            response.send('Limpiada');
-        });
-    });
-
-    //{{SERVER}}/classes/
-    router.post('/', function (request, response) {
-        //console.log(request.body);
-        db.serialize(function () {
-            db.run('INSERT INTO '+TABLE+' values ("'
-                + request.body.nombre + '",'
-                + request.body.class_id + ',"'
-                + request.body.classroom + '")');
-            response.send('Se ha agregado el usuario: ' + request.body.nombre + ', ' + request.body.class_id + ', ' + request.body.classroom);
-        });
-
-    });
-    //{{SERVER}}/classes/
+    //{{SERVER}}/users/ 
+    //Lista todos los usuarios
     router.get('/', function (request, response) {
-
-        db.serialize(function () {
-
-            db.all("SELECT * FROM "+TABLE, function (error, rows) {
-                if (error) {
-                    response.send(error);
-                } else {
-                    response.send(rows);
-                }
-            })
-
-            
+        model.getAll(TABLE)
+        .then((rows)=>{
+            response.send(rows);
+        }).catch((error)=>{
+            console.error(error);
+            response.send(error);
         });
     });
+
+    //{{SERVER}}/users/id 
+    //Trae un usuario por ID
+    router.get('/:id', function (request, response) {
+        let id = request.params.id;
+        model.getById(TABLE, id)
+        .then((row)=>{
+            response.send(row);
+        }).catch((error)=>{
+            console.error(error);
+            response.send(error);
+        });
+    });
+
+    //{{SERVER}}/users/
+    //Crea un usuario
+    router.post('/', function (request, response) {        
+        model.create(TABLE, request.body)
+        .then((object)=>{
+            response.send(object)
+        }).catch((error)=>{
+            console.error(error);
+            response.send(error);
+        });
+    });
+
+    //{{SERVER}}/users/:id
+    //Edita un usuario
+    router.put('/:id', function (request, response) {        
+        let id = request.params.id;
+        model.update(TABLE, request.body, id)
+        .then((row)=>{
+            response.send(row);
+        }).catch((error)=>{
+            console.error(error);
+            response.send(error);
+        });
+
+    });
+    
+
+    //{{SERVER}}/users/id
+    //Elimina un usuario
+    router.delete('/:id', function (request, response) {
+        let id = request.params.id;        
+        model.delete(TABLE, id)
+        .then((message)=>{
+            response.send(message);
+        }).catch((error)=>{
+            console.error(error);
+            response.send(error);
+        });
+    });
+
+
+    //{{SERVER}}/users/delete_users
+    //Limpiar tabla
+    router.get('/option/clean', function (request, response) {
+        model.clean(TABLE)
+        .then((message)=>{
+            response.send(message)
+        }).catch((error)=>{
+            console.error(error);
+            response.send(error);
+        });
+    });
+
+    //{{SERVER}}/users/create_users
+    router.post('/option/initialize', function (request, response) {
+        model.initialize(TABLE, request.body)
+        .then((message)=>{
+            response.send(message)
+        }).catch((error)=>{
+            console.error(error);
+            response.send(error);
+        });
+    });    
 
     return router;
 }
