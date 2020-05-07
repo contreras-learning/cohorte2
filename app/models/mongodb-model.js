@@ -1,3 +1,5 @@
+let ObjectId = require('mongodb').ObjectId;
+
 const MongoDBModel = function (MongoClient, url) {
     // Database Name
     const dbName = 'myproject';
@@ -68,8 +70,11 @@ const MongoDBModel = function (MongoClient, url) {
                     reject(error);
                 } else {
                     let database = client.db(dbName);
-                    const collection = database.collection(table);                    
-                    collection.findOne({name:id},function(errorGetAll, result){
+                    const collection = database.collection(table); 
+                    collection.findOne({_id: new ObjectId(id)},function(errorGetAll, result){
+                        if (errorGetAll){
+                            reject(errorGetAll);
+                        }
                         resolve(result);
                         client.close();
                     });
