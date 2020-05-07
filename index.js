@@ -2,13 +2,21 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
-let db = new sqlite3.Database('./db/db.sqlite');
+const sqliteClient = new sqlite3.Database('./db/db.sqlite');
+const mongodbCliente = require('mongodb').MongoClient;
+const url = 'mongodb://localhost:27017';
+const databaseConfig = { 
+    "sqlite": sqliteClient, 
+    "mongodb": mongodbCliente, 
+    "mongodb_url": url,
+    "default": 'mongodb'
+};
 
-let usersController = require('./app/controllers/users')(db);
-let classesController = require('./app/controllers/classes')(db);
+let usersController = require('./app/controllers/users')(databaseConfig);
+let classesController = require('./app/controllers/classes')(databaseConfig);
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 //{{SERVER}}/users/
 app.use('/users', usersController);
 app.use('/classes', classesController);

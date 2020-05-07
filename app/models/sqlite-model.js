@@ -49,12 +49,14 @@ const SQLiteModel = function(sqlite){
                 query+=');';
 
                 console.log(query);
-                try {
-                    sqlite.run(query);
-                    resolve(params);
-                } catch (error) {
-                    reject(error);
-                }
+                sqlite.run(query, function(response, error){
+                    if(error){
+                        reject(error);
+                    }else{
+                        resolve(params);
+                    }
+                    
+                }); 
             });
         });
     };
@@ -74,13 +76,13 @@ const SQLiteModel = function(sqlite){
                     }                    
                 }
                 query+=element.substring(0, element.length - 2);
-                query+=' WHERE id='+id;                
-                try {
-                    sqlite.run(query);
+                query+=' WHERE id='+id;
+                sqlite.run(query, function(response, error){
+                    if(error){
+                        reject(error);
+                    }
                     resolve(params);
-                } catch (error) {
-                    reject(error);
-                }
+                });                
             });
         });        
     };
@@ -90,13 +92,13 @@ const SQLiteModel = function(sqlite){
             sqlite.serialize(function () {
 
                 let query = 'DELETE FROM ' + table+ ' WHERE id='+id;
-                console.log(query);            
-                try {
-                    sqlite.run(query);
+                console.log(query);     
+                sqlite.run(query, function(response, error){
+                    if(error){
+                        reject(error);
+                    }
                     resolve('Se ha eliminado '+id);
-                } catch (error) {
-                    reject(error);
-                }
+                });                
             });
         });        
     };
@@ -105,13 +107,13 @@ const SQLiteModel = function(sqlite){
         return new Promise((resolve, reject) =>{
             sqlite.serialize(function () {
                 let query = 'DROP TABLE IF EXISTS ' + table;
-                console.log(query);            
-                try {
-                    sqlite.run(query);
+                console.log(query);
+                sqlite.run(query, function(response, error){
+                    if(error){
+                        reject(error);
+                    }
                     resolve('Se limpió la base de datos '+table);
-                } catch (error) {
-                    reject(error);
-                }
+                });               
             });
         });        
     };
@@ -127,13 +129,13 @@ const SQLiteModel = function(sqlite){
                 query+=element.substring(0, element.length - 2);
                 query+=');' 
                 console.log(query);
-                try {
-                    sqlite.run(query);
-                    params.id = 'INTEGER PRIMARY KEY';
+
+                sqlite.run(query, function(response, error){
+                    if(error){
+                        reject(error);
+                    }
                     resolve(params);
-                } catch (error) {
-                    reject(error);
-                }
+                });              
             });
         });        
     };
