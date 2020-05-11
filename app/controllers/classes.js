@@ -11,6 +11,9 @@ module.exports = function (databaseConfig) {
         case 'sqlite':
             model = require('../models/sqlite-model')(databaseConfig.sqlite);
             break;
+        case 'firestore':
+            model = require('../models/firestore-model')(databaseConfig.firestore);
+            break;
         default:
             model = require('../models/sqlite-model')(databaseConfig.sqlite);
             break;
