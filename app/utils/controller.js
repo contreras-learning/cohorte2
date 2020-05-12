@@ -1,15 +1,14 @@
-module.exports = function (databaseConfig) {
-    
+const controller = function(TABLE){
     const express = require('express');
-    const router = express.Router();
+    this.router = express.Router();
     
-    const TABLE = 'users';
     
-    const general = require('../utils/general')();
+    const general = require('./general')();
     general.setDefaultDatabase('firestore');
     let model = general.getDatabaseModel();
 
-    //{{SERVER}}/users/ 
+
+    //{{SERVER}}/resource/ 
     //Lista todos los usuarios
     router.get('/', function (request, response) {
         model.getAll(TABLE)
@@ -21,7 +20,7 @@ module.exports = function (databaseConfig) {
             });
     });
 
-    //{{SERVER}}/users/id 
+    //{{SERVER}}/resource/id 
     //Trae un usuario por ID
     router.get('/:id', function (request, response) {
         let id = request.params.id;
@@ -34,7 +33,7 @@ module.exports = function (databaseConfig) {
             });
     });
 
-    //{{SERVER}}/users/
+    //{{SERVER}}/resource/
     //Crea un usuario
     router.post('/', function (request, response) {
         model.create(TABLE, request.body)
@@ -46,7 +45,7 @@ module.exports = function (databaseConfig) {
             });
     });
 
-    //{{SERVER}}/users/:id
+    //{{SERVER}}/resource/:id
     //Edita un usuario
     router.put('/:id', function (request, response) {
         let id = request.params.id;
@@ -61,7 +60,7 @@ module.exports = function (databaseConfig) {
     });
 
 
-    //{{SERVER}}/users/id
+    //{{SERVER}}/resource/id
     //Elimina un usuario
     router.delete('/:id', function (request, response) {
         let id = request.params.id;
@@ -75,7 +74,7 @@ module.exports = function (databaseConfig) {
     });
 
 
-    //{{SERVER}}/users/delete_users
+    //{{SERVER}}/resource/delete_users
     //Limpiar tabla
     router.get('/option/clean', function (request, response) {
         model.clean(TABLE)
@@ -87,7 +86,7 @@ module.exports = function (databaseConfig) {
             });
     });
 
-    //{{SERVER}}/users/create_users
+    //{{SERVER}}/resource/create_users
     router.post('/option/initialize', function (request, response) {
         model.initialize(TABLE, request.body)
             .then((message) => {
@@ -98,5 +97,6 @@ module.exports = function (databaseConfig) {
             });
     });
 
-    return router;
+    return this;
 }
+module.exports = controller;
