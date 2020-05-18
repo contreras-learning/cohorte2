@@ -1,0 +1,27 @@
+{
+    "app": {
+        "name": "Aplicación backend para clases fantabulosos",
+        "port": 5000,
+        "bind": "0.0.0.0"
+    },
+    "database":{
+        "default":"sqlite",
+        "mongodb":{
+            "databaseName":"Mi base datos",
+            "url":"mongodb://localhost:27017"
+        },
+        "firebase":{
+            "url":"https://contreras-bictia.firebaseio.com"
+        }
+
+    },
+    "jwt": {
+        "secret": "bictia",
+        "timeToExpireInMinutes": 60
+    },
+    "login":{
+        "username": "admin",
+        "password": "a8ey1nasdu",
+        "type": "Admin"
+    }
+}

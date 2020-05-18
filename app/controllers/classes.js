@@ -3,7 +3,7 @@ module.exports = function (databaseConfig) {
     const router = express.Router();
     const TABLE = 'classes';
     const general = require('../utils/general')();
-    general.setDefaultDatabase('firestore');
+    
     let model = general.getDatabaseModel();
 
     //{{SERVER}}/users/ 

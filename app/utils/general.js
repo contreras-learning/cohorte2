@@ -1,6 +1,9 @@
+const jwt = require('jsonwebtoken');
+const config = require('../../config.json');
+
 const General = function () {
 
-    General.defaultDatabase = 'sqlite'; 
+    General.defaultDatabase = config.database.default;
 
     if (typeof General.firebase == 'undefined') {
         const admin = require("firebase-admin");
@@ -8,7 +11,7 @@ const General = function () {
         
         admin.initializeApp({
             credential: admin.credential.cert(serviceAccount),
-            databaseURL: "https://contreras-bictia.firebaseio.com"
+            databaseURL: config.database.firebase.url
         });
         General.firebase = admin;
     }
@@ -20,7 +23,7 @@ const General = function () {
 
     if (typeof General.mongoDB == 'undefined') {
         const mongodbCliente = require('mongodb').MongoClient;
-        const url = 'mongodb://localhost:27017';
+        const url = config.database.mongodb.url;
         General.mongoDB = { client: mongodbCliente, url: url };
     }
 
@@ -60,6 +63,34 @@ const General = function () {
     this.setDefaultDatabase = function (database) {
         General.defaultDatabase = database;
     };
+
+    this.validateLogin = function (request){
+        let result = { auth: false, message: 'Initial value'};
+
+        let token = request.headers['auth-jwt'];
+
+        if (token){
+            jwt.verify(token, config.jwt.secret, function (error, decoded) {
+                if(error){
+                    result.auth = false;
+                    if (typeof error == 'TokenExpiredError'){
+                        result.message = 'El token no es valido, ya expiró en la fecha: '+ error.expiredAt;
+                    }else{
+                        result.message = 'El token no es valido';
+                    }                    
+                }else{
+                    result.auth = true;
+                    result.message = decoded
+                }
+            });
+        }else{
+            result.auth = false;
+            result.message = 'No se ha enviado ningún token'
+        }
+
+
+        return result;
+    }
 
 
     return this;

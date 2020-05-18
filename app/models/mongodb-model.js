@@ -1,9 +1,8 @@
 let ObjectId = require('mongodb').ObjectId;
+const config = require('../../config.json');
 
 const MongoDBModel = function (MongoClient, url) {
-    // Database Name
-    const dbName = 'myproject';
-
+    
     //const MongoClient = require('mongodb').MongoClient;
 
     this.getAll = function (table) {
@@ -13,7 +12,7 @@ const MongoDBModel = function (MongoClient, url) {
                     console.error(error);
                     reject(error);
                 } else {
-                    let database = client.db(dbName);
+                    let database = client.db(config.database.mongodb.databaseName);
                     const collection = database.collection(table);
                     collection.find({}).toArray(function (errorGetAll, result) {
                         resolve(result);
@@ -31,7 +30,7 @@ const MongoDBModel = function (MongoClient, url) {
                     console.error(error);
                     reject(error);
                 } else {
-                    let database = client.db(dbName);
+                    let database = client.db(config.database.mongodb.databaseName);
                     const collection = database.collection(table);
 
                     collection.findOne({ _id: new ObjectId(id) }, function (errorGetAll, result) {
@@ -54,7 +53,7 @@ const MongoDBModel = function (MongoClient, url) {
                     console.error(error);
                     reject(error);
                 } else {
-                    let database = client.db(dbName);
+                    let database = client.db(config.database.mongodb.databaseName);
                     const collection = database.collection(table);
                     collection.insertOne(params, function (errorInsert, result) {
                         if (errorInsert) {
@@ -77,7 +76,7 @@ const MongoDBModel = function (MongoClient, url) {
                     console.error(error);
                     reject(error);
                 } else {
-                    let database = client.db(dbName);
+                    let database = client.db(config.database.mongodb.databaseName);
                     const collection = database.collection(table);
                     collection.updateOne({ _id: new ObjectId(id) }, { $set: params}, function (errorUpdate, result) {
                         if (errorUpdate) {
@@ -99,7 +98,7 @@ const MongoDBModel = function (MongoClient, url) {
                     console.error(error);
                     reject(error);
                 } else {
-                    let database = client.db(dbName);
+                    let database = client.db(config.database.mongodb.databaseName);
                     const collection = database.collection(table);                    
                     collection.deleteOne({ _id: new ObjectId(id) }, function (errorDelete, result) {
                         if (errorDelete) {
@@ -121,9 +120,9 @@ const MongoDBModel = function (MongoClient, url) {
                     console.error(error);
                     reject(error);
                 } else {
-                    let database = client.db(dbName);
-                    const collection = database.collection(table);                    
-                    collection.remove({}, function (errorDrop, result) {
+                    let database = client.db(config.database.mongodb.databaseName);
+                    const collection = database.collection(table);        
+                    collection.drop({}, function (errorDrop, result) {
                         if (errorDrop) {
                             reject(errorDrop);
                         } else {

@@ -5,7 +5,11 @@ const SQLiteModel = function(sqlite){
             sqlite.serialize(function () {
                 sqlite.all("SELECT * FROM "+table, function (error, rows) {
                     if (error) {
-                        reject(error);
+                        let info = {
+                            message: error.message,
+                            table: table                            
+                        }
+                        reject(info);
                     } else {
                         resolve(rows);
                     }
@@ -19,7 +23,12 @@ const SQLiteModel = function(sqlite){
             sqlite.serialize(function () {
                 sqlite.all("SELECT * FROM "+table+ " WHERE id="+id, function (error, rows) {
                     if (error) {
-                        reject(error);
+                        let info = {
+                            message: error.message,
+                            table: table,
+                            id: id
+                        }
+                        reject(info);
                     } else {
                         resolve(rows[0]);
                     }
@@ -51,7 +60,12 @@ const SQLiteModel = function(sqlite){
                 console.log(query);
                 sqlite.run(query, function(response, error){
                     if(error){
-                        reject(error);
+                        let info = {
+                            message: error.message,
+                            table: table,
+                            params: params
+                        }
+                        reject(info);
                     }else{
                         resolve(params);
                     }
@@ -79,7 +93,13 @@ const SQLiteModel = function(sqlite){
                 query+=' WHERE id='+id;
                 sqlite.run(query, function(response, error){
                     if(error){
-                        reject(error);
+                        let info = {
+                            message: error.message,
+                            table: table,
+                            params: params,
+                            id: id
+                        }
+                        reject(info);
                     }
                     resolve(params);
                 });                
@@ -95,7 +115,12 @@ const SQLiteModel = function(sqlite){
                 console.log(query);     
                 sqlite.run(query, function(response, error){
                     if(error){
-                        reject(error);
+                        let info = {
+                            message: error.message,
+                            table: table,
+                            id: id
+                        }
+                        reject(info);
                     }
                     resolve('Se ha eliminado '+id);
                 });                
@@ -110,7 +135,11 @@ const SQLiteModel = function(sqlite){
                 console.log(query);
                 sqlite.run(query, function(response, error){
                     if(error){
-                        reject(error);
+                        let info = {
+                            message: error.message,
+                            table: table                            
+                        }
+                        reject(info);
                     }
                     resolve('Se limpió la base de datos '+table);
                 });               
@@ -132,7 +161,12 @@ const SQLiteModel = function(sqlite){
 
                 sqlite.run(query, function(response, error){
                     if(error){
-                        reject(error);
+                        let info = {
+                            message: error.message,
+                            table: table,
+                            params: params
+                        }
+                        reject(info);
                     }
                     resolve(params);
                 });              

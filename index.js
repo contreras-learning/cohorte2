@@ -1,5 +1,11 @@
 const express = require('express');
 const app = express();
+const config = require('./config.json');
+//const config = require('./app/utils/config');
+
+const port = process.env.PORT ? process.env.PORT : config.app.port ? config.app.port : 3000 ;
+const bind = process.env.BIND ? process.env.BIND : config.app.bind ? config.app.bind : '127.0.0.1' ;
+//const port = process.env.PORT || config.app.port || 3000;
 
 
 //URL Encode Support for POST, PUT Methods
@@ -20,6 +26,9 @@ app.use('/login', loginController);
 
 
 
-app.listen(3456, function () {
-    console.log('Corriendo');
+app.listen(port,bind, function () {
+    console.log('***********************');
+    console.log('Aplicación: '+ config.app.name);
+    console.log('Corriendo en: '+ config.app.bind+':'+config.app.port);
+    console.log('***********************');
 })
