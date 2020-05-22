@@ -25,6 +25,10 @@ app.use('/classes', classesController);
 app.use('/login', loginController);
 
 
+app.user('/', (request, response)=>{
+    response.send('Bienvenido a la API de ' + config.app.name);
+});
+
 
 app.listen(port,bind, function () {
     console.log('***********************');
