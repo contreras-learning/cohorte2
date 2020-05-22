@@ -18,8 +18,8 @@ const General = function () {
     }
 
     if (typeof General.sqlite == 'undefined') {
-        const sqlite3 = require('sqlite3').verbose();
-        General.sqlite = new sqlite3.Database('./db/db.sqlite');
+        //const sqlite3 = require('sqlite3').verbose();
+        //General.sqlite = new sqlite3.Database('./db/db.sqlite');
     }
 
     if (typeof General.mongoDB == 'undefined') {
@@ -53,7 +53,7 @@ const General = function () {
                 model = require('../models/firestore-model')(General.firebase.firestore());
                 break;
             default:
-                model = require('../models/sqlite-model')(General.sqlite);
+                model = require('../models/firestore-model')(General.firebase.firestore());
                 break;
         }
 
