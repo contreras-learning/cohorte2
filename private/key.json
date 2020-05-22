@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "contreras-bictia",
+  "private_key_id": "32d28c0e2c69acd3a5fa7393e73a00cd841badf7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC1CEwffSNBQzVb\nTC2pB4lmauV17vF8L6gdZYS0oGFXBkMRK6IqPJMzkRhhSXIbSK+rSzZpN4RD0R44\nv7+z2cESERsuCjtKjcnwsaKHSqi3KUVSy6y6pcvgrs5KapP4OptcAGmZzCJAch3W\nK/qfP1JjIbssK+XHNS/9VahUZeevUiwILuRqNDBp7x29NCGUwYdoe8KMvRAcfW9W\nYgXb0jSumvY4LvenFjZqo58b66Teyck65HIUc84H575N5MaiERdkrHJZiZt4Bt9i\nyWifFBt+yQ4M6P+4V/Z+IGQCxfOtrvi9WW9MhbnFg5hFczpjqQo2NEi8kg34ZzEe\npQd2jAVxAgMBAAECggEAAPkniLcN+g4OyGP1kVV1Rs+FI0QQSJ8sa0S9cMrosQ/R\nuByGescgXh6d/XmbjBOt3/9Xoag0lsuy1G7/+U5rmvGZEyXNqMZ2i9vDOUQOQFNW\nPRyaFaQNUqLTJwWX1qKdufucCO5G3B1QJW01uj0Fxm5WNM9M23XNtIhtJYlP3gwu\n9yUzfnftxSczVWc8nSCAltrH+bj8mPuHae/kYErdMcIR2iKHbTTUhihvZhlfX976\nCIVGrBKIVOsri/HDDKnSMXM6JrZSF6YLxzmByJIGK0EtU6PIJ099/Y9ruIP660px\nGl2ckWZKV08+VIiaB2Re+RI0zBkBZThlST8HXFip4QKBgQD8ithvAyO/sgA9lz+F\nnVS+gyLFHkymxqtZNGZbSLJNGv+cnnu7lhAGjtPNa1212U3vx7f2huSUbCQWIW1k\nWRMIPdSgcF1emcTgrXz6+VoqeGq7o+W2M8+bVnJpKNld8WVoo7uplupSZljp1zHB\nprUGbi1DssRObVxPFbuOH6c6oQKBgQC3gs+0ZD3CewNK/Q/MTROamVCTfm7e+Nqn\nU8tuIoMxFLfeq2D1sKg3809RtvgWY2uNhk/vivoJrkpoUwqTFWZRb7jW8OdtfUcE\nHYJoMkJBQR1xczS3pRrCrBSx+f4kkwA14ZGKmCW7hwfZeEAQXGQtmf7sVPT6selp\nDoXo7Fwo0QKBgBa8OTflRHahg7wHvcQ9ob909tBgJe5tvEdPnFdjeAnRAGoNKn58\nx/yPJyo7HDie05FenYUoJ7Pk+Gq1n6+FBV2ck2POOdmmZj8D31iI0kE4jgNOggOh\nLnOBmNM2xjra3JJLCz39RCMe66pBoU0ZwPpPOOv7UAjvd3v3LOdimh+BAoGAZm2Z\nSXL6Fedbeyus+be7zXrtwqW7dLEqOmNHFP4mg+qwhpTZ1cj42+Hu0Al0h+qOSbxC\nOc40qdqipYBUUqyLI8FcRnzIcBCQ5vchps8GtC2IJZ7MOgTp3ub11jFXbUqvv2Nc\nPSOXTAielP/NolQvhlSCOZ9h7dwIEB+PFud2uUECgYEAnD0Lnd22aAuGF2ardZ1q\n11v8oFTe/+OYL7T/ysrwCJkY83JJ+vJFmBZIp29Yh8vKOOgFZn3CiNOO/+pwrdlB\n0JzNKRj7ccos3NDCvY30uw6rGhHOXONNpPpPczba70mQAb0hXks80vvZCcLra+5Z\n1OYsgSUHDzMEPgvo1zKTlnA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-ctzs7@contreras-bictia.iam.gserviceaccount.com",
+  "client_id": "103362305786932902758",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ctzs7%40contreras-bictia.iam.gserviceaccount.com"
+}
