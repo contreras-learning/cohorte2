@@ -25,7 +25,7 @@ app.use('/classes', classesController);
 app.use('/login', loginController);
 
 
-app.user('/', (request, response)=>{
+app.use('/', (request, response)=>{
     response.send('Bienvenido a la API de ' + config.app.name);
 });
 
