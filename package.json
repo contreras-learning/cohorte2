@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
     "start_daemon": "nodemon index.js",
-    "start": "pm2 start index.js --name ejemplo_nodejs_bictia",
-    "stop": "pm2 stop ejemplo_nodejs_bictia; pm2 delete ejemplo_nodejs_bictia",
+    "start_pm2": "pm2 start index.js --name ejemplo_nodejs_bictia",
+    "stop_pm2": "pm2 stop ejemplo_nodejs_bictia; pm2 delete ejemplo_nodejs_bictia",
     "open": "start http://localhost"
   },
   "keywords": [

@@ -5,7 +5,7 @@
         "bind": "0.0.0.0"
     },
     "database":{
-        "default":"sqlite",
+        "default":"firestore",
         "mongodb":{
             "databaseName":"Mi base datos",
             "url":"mongodb://localhost:27017"
