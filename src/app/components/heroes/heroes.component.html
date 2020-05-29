@@ -7,5 +7,18 @@
   </li>
 </ul>
 
-
-<app-hero-detail [hero]="selectedHero"></app-hero-detail>
+<div>
+  <label>Hero name:
+    <input #heroName />
+  </label>
+  <label>Hero power:
+    <input #heroPower />
+  </label>
+  <label>Hero color:
+    <input #heroColor />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value, heroPower.value, heroColor.value); heroName.value=''; heroPower.value=''; heroColor.value='' ">
+    add
+  </button>
+</div>

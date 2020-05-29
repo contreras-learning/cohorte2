@@ -5,9 +5,15 @@
     <div>
       <label>name:
         <input [(ngModel)]="hero.name" placeholder="name"/>
+      </label>      
+    </div>
+    <div>
+      <label>power:
+        <input [(ngModel)]="hero.power" placeholder="power"/>
       </label>
     </div>
   
   </div>
 
+  <button (click)="save()">save</button>
   <button (click)="goBack()">go back</button>
