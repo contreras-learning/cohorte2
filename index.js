@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 const config = require('./config.json');
+const cors = require('cors');
 //const config = require('./app/utils/config');
 
 const port = process.env.PORT ? process.env.PORT : config.app.port ? config.app.port : 3000;
 const bind = process.env.BIND ? process.env.BIND : config.app.bind ? config.app.bind : '127.0.0.1';
 //const port = process.env.PORT || config.app.port || 3000;
 
+app.use(cors());
 
 //URL Encode Support for POST, PUT Methods
 const bodyParser = require('body-parser');
