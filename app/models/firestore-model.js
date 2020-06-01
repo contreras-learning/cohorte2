@@ -54,7 +54,7 @@ const FirestoreModel = function (firestore) {
             firestore.collection(table).doc(id).update(params)
             .then((respuesta)=>{        
                 params.id = respuesta.id;
-                resolve(params);                
+                resolve(params);
             })
             .catch((error)=>{
                 reject(error);
