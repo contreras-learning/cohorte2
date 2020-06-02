@@ -1,4 +1,15 @@
 import { Component } from '@angular/core';
+import { ActionSheetController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
+
+import { Users } from "../model/users";
+
+/* 
+Paso 1: Import
+Paso 2: Constructor
+Paso 3: Usar
+*/
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +18,98 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(private instancia: ActionSheetController,
+    private alert: AlertController, private toastController: ToastController) { }
+
+  users: Users[] = [];
+
+  ngOnInit() {
+    this.users.push({ title: 'Obi', subtitle: 'Yedi Master', description: 'Anaki\'s Advisor', avatar: 'https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/list/avatar-ben.png' });
+    this.users.push({ title: 'Leia', subtitle: 'Princess', description: 'Daugther of Anaki', avatar: 'https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/list/avatar-leia.png' })
+  }
+
+
+  async userSeleted(user: Users) {
+    let toast = await this.toastController.create({ 
+      duration: 3000,
+      header: 'Se ha elegido a ' + user.title, 
+      message: 'Soy ' + user.description, 
+      position: 'bottom',
+      buttons: [{
+        handler:()=>{
+          console.log('Se ha eliminado el usuario');
+          this.users.pop();
+        },
+        text: 'Eliminar',
+        icon: 'trash'
+      }]
+    });
+    toast.present();
+
+  }
+
+  async confimarBorrado() {
+    const element = await this.alert.create({
+      header: 'En realidad quiere eliminar este elemento',
+      message: 'Esta acción no se puede deshacer, por favor debe estar seguro de la acción.',
+      buttons: [
+        {
+          text: 'Confirmar',
+          handler: () => {
+            console.log('Se confirmo la acción');
+          }
+        },
+        {
+          text: 'Cancelar',
+          handler: () => {
+            console.log('Se canceló la acción');
+          }
+        }
+      ]
+    });
+    element.present();
+  }
+
+  async mostrarHoja() {
+    const sheet = await this.instancia.create({
+      buttons: [{
+        text: 'Delete',
+        role: 'destructive',
+        icon: 'trash',
+        handler: () => {
+          console.log('Delete clicked');
+          this.confimarBorrado();
+        }
+      }, {
+        text: 'Share',
+        icon: 'share',
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }, {
+        text: 'Play (open modal)',
+        icon: 'caret-forward-circle',
+        handler: () => {
+          console.log('Play clicked');
+        }
+      }, {
+        text: 'Favorite',
+        icon: 'heart',
+        handler: () => {
+          console.log('Favorite clicked');
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }],
+      header: 'Ejemplo'
+    });
+    sheet.present();
+
+  }
 
 }
