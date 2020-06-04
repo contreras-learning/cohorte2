@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import { GeneralService } from "../services/general.service";
 
 import { Users } from "../model/users";
 
@@ -19,13 +20,18 @@ Paso 3: Usar
 export class Tab2Page {
 
   constructor(private instancia: ActionSheetController,
-    private alert: AlertController, private toastController: ToastController) { }
+    private alert: AlertController, 
+    private toastController: ToastController, 
+    private services: GeneralService) { }
 
-  users: Users[] = [];
+  users: any[] = [];
 
   ngOnInit() {
-    this.users.push({ title: 'Obi', subtitle: 'Yedi Master', description: 'Anaki\'s Advisor', avatar: 'https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/list/avatar-ben.png' });
-    this.users.push({ title: 'Leia', subtitle: 'Princess', description: 'Daugther of Anaki', avatar: 'https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/list/avatar-leia.png' })
+    this.services.getUsers().subscribe((users)=>{
+      this.users = <any[]> users['results'];
+    })
+    /* this.users.push({ title: 'Obi', subtitle: 'Yedi Master', description: 'Anaki\'s Advisor', avatar: 'https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/list/avatar-ben.png' });
+    this.users.push({ title: 'Leia', subtitle: 'Princess', description: 'Daugther of Anaki', avatar: 'https://raw.githubusercontent.com/ionic-team/ionic-docs/master/src/demos/api/list/avatar-leia.png' }) */
   }
 
 

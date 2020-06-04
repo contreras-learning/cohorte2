@@ -13,5 +13,16 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <ion-list>
+    <ion-item *ngFor="let user of users">
+      <ion-avatar slot="start">
+        <img [src]="user.picture.medium">
+      </ion-avatar>
+      <ion-label>
+        <h3>{{user.name.first}} {{user.name.last | uppercase}}</h3>
+        <h4>{{user.email}}</h4>
+        <p>{{user.phone}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

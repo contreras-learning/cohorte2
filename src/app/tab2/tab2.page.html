@@ -16,12 +16,12 @@
   <ion-list>
     <ion-item *ngFor="let user of users" (click)="userSeleted(user)">
       <ion-avatar slot="start">
-        <img [src]="user.avatar">
+        <img [src]="user.picture.medium">
       </ion-avatar>
       <ion-label>
-        <h2>{{user.title}}</h2>
-        <h3>{{user.subtitle}}</h3>
-        <p>{{user.description}}</p>
+        <h3>{{user.name.first}} {{user.name.last | uppercase}}</h3>
+        <h4>{{user.email}}</h4>
+        <p>{{user.phone}}</p>
       </ion-label>
     </ion-item>
   </ion-list>
