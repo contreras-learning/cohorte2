@@ -13,8 +13,10 @@
     </ion-toolbar>
   </ion-header>
 
+  <h1>Usuario actual: {{currentUser}}</h1>
+
   <ion-list>
-    <ion-item *ngFor="let user of users">
+    <ion-item *ngFor="let user of users" (click)="seletedUser(user)">
       <ion-avatar slot="start">
         <img [src]="user.picture.medium">
       </ion-avatar>

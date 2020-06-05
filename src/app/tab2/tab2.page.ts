@@ -3,6 +3,7 @@ import { ActionSheetController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
 import { GeneralService } from "../services/general.service";
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 import { Users } from "../model/users";
 
@@ -22,7 +23,8 @@ export class Tab2Page {
   constructor(private instancia: ActionSheetController,
     private alert: AlertController, 
     private toastController: ToastController, 
-    private services: GeneralService) { }
+    private services: GeneralService,
+    private geolocation: Geolocation) { }
 
   users: any[] = [];
 
@@ -76,6 +78,22 @@ export class Tab2Page {
     element.present();
   }
 
+  async mostrarUbicacion(lat, long, accuracy) {
+    const element = await this.alert.create({
+      header: 'Esta es tu ubicación',
+      message: 'Tu latitud es:' + lat + ', longitud: ' + long + ', con una precisión de: ' + accuracy,
+      buttons: [
+        {
+          text: 'Cerrar',
+          handler: () => {
+            console.log('Se cerró el mensaje');
+          }
+        },        
+      ]
+    });
+    element.present();
+  }
+
   async mostrarHoja() {
     const sheet = await this.instancia.create({
       buttons: [{
@@ -99,10 +117,20 @@ export class Tab2Page {
           console.log('Play clicked');
         }
       }, {
-        text: 'Favorite',
-        icon: 'heart',
+        text: 'Location',
+        icon: 'location',
         handler: () => {
-          console.log('Favorite clicked');
+
+          this.geolocation.getCurrentPosition().then((resp) => {
+            // resp.coords.latitude
+            // resp.coords.longitude
+            this.mostrarUbicacion(resp.coords.latitude,resp.coords.longitude,resp.coords.accuracy);
+           }).catch((error) => {
+             console.log('Error getting location', error);
+           });
+
+          
+          //console.log('Favorite clicked');
         }
       }, {
         text: 'Cancel',
