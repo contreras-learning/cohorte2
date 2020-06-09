@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Tab 5
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 5</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div *ngIf="hero">
+    
+    <h2>{{hero.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{hero.id}}</div>
+    <div>
+      <label>name:
+        <input [(ngModel)]="hero.name" placeholder="name"/>
+      </label>      
+    </div>
+    <div>
+      <label>power:
+        <input [(ngModel)]="hero.power" placeholder="power"/>
+      </label>
+    </div>
+  
+  </div>
+
+  <button (click)="save()">save</button>
+  <button (click)="goBack()">go back</button>
+  
+</ion-content>
