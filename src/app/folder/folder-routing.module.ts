@@ -3,17 +3,29 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FolderPage } from './folder.page';
 import { OtroComponent } from "./otro/otro.component";
+import { HeroesPage  } from "./heroes/heroes.page";
 
 const routes: Routes = [
+
   {
-    path: 'prueba',
-    component: FolderPage
-  },
-  {
-    path: 'noprueba',
-    component: OtroComponent
-  },
-  { path: '', redirectTo: '/prueba', pathMatch: 'full' }
+    path: 'resource',
+    component: HeroesPage,
+    children: [
+      {
+        path: 'heroes',
+        loadChildren: () => import('./heroes/heroes.module').then(m => m.HeroesPageModule)
+      },
+      {
+        path: 'hero-detail',
+        loadChildren: () => import('./hero-detail/hero-detail.module').then(m => m.HeroDetailPageModule)
+      },      
+      {
+        path: '',
+        redirectTo: '/resource/heroes',
+        pathMatch: 'full'
+      }
+    ]
+  }
 ];
 
 @NgModule({
