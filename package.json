@@ -29,6 +29,7 @@
     "@ionic/storage": "^2.2.0",
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-sqlite-storage": "^5.0.0",
@@ -81,7 +82,8 @@
     },
     "platforms": [
       "browser",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
