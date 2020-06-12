@@ -16,6 +16,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -23,7 +26,8 @@ import { AppComponent } from './app.component';
     IonicModule.forRoot(), 
     AppRoutingModule,
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
     StatusBar,

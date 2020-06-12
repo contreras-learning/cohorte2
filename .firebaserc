@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "contreras-bictia": {
+      "hosting": {
+        "app": [
+          "contreras-bictia"
+        ]
+      }
+    }
+  }
+}

@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyBid5Zbo4Q6mdMbz8eDRGj7_tm5N3-Xifo",
+    authDomain: "contreras-bictia.firebaseapp.com",
+    databaseURL: "https://contreras-bictia.firebaseio.com",
+    projectId: "contreras-bictia",
+    storageBucket: "contreras-bictia.appspot.com",
+    messagingSenderId: "987937928754",
+    appId: "1:987937928754:web:993408524e6c1cabd26e2b",
+    measurementId: "G-RT72VEZV7Z"
+  }
 };
 
 /*
