@@ -79,7 +79,11 @@ export class Tab1Page {
   }
 
   login() {
-    this.auth.signInWithPopup(new auth.GoogleAuthProvider());
+    this.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((user)=>{
+      this.firestore.collection('users').doc(user.user.uid).set({email: user.user.email, displayname:user.user.displayName, method: user.user.providerId, })
+      console.log(user);      
+      this.ngOnInit();
+    })
   }
   loginEmailPassword(email, password) {
     this.auth.signInWithEmailAndPassword(email, password)
