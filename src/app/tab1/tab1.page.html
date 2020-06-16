@@ -28,17 +28,28 @@
     </ion-item>
   </ion-list> -->
 
-  <!-- <div *ngIf="auth.user | async as user; else showLogin">
+  <div *ngIf="auth.user | async as user; else showLogin">
     <h1>Hello {{ user.displayName }}!</h1>
     <button (click)="logout()">Logout</button>
+
+    <br>
+
+    <input type="file" (change)="uploadFile($event)">
+    <div>{{percent}}</div>
+    <a [href]="url" target="_blank" rel="noopener noreferrer">{{url}}</a>
+
+
   </div>
   <ng-template #showLogin>
     <p>Please login.</p>
     <button (click)="login()">Login with Google</button>
     <button (click)="loginEmailPassword('usuarionuevo@ejemplo.com', '1234567')">Login with email and password</button>
   </ng-template>
- -->
-  <input type="file" (change)="uploadFile($event)">
+
+
+
+
+  <!-- <img [src]="downloadURL | async" alt="Imagen cargada"> -->
 
   <!-- <ion-list>
     <ion-item *ngFor="let hero of heroes">
@@ -48,5 +59,13 @@
       </ion-label>
     </ion-item>
   </ion-list> -->
-  
+  <ion-list>
+    <ion-item *ngFor="let file of uploadFiles">
+      <ion-label>
+        <h3>Cargado el: {{file.created_at.toDate() | date: 'dd MMM hh:mm' }}</h3>
+        <img [src]="file.file" alt="Archivo">
+      </ion-label>
+
+    </ion-item>
+  </ion-list>
 </ion-content>
