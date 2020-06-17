@@ -30,20 +30,26 @@
 
   <div *ngIf="auth.user | async as user; else showLogin">
     <h1>Hello {{ user.displayName }}!</h1>
-    <button (click)="logout()">Logout</button>
+    <button (click)="logout()">Cerrar Sesión</button>
 
     <br>
 
     <input type="file" (change)="uploadFile($event)">
     <div>{{percent}}</div>
     <a [href]="url" target="_blank" rel="noopener noreferrer">{{url}}</a>
-
-
   </div>
   <ng-template #showLogin>
-    <p>Please login.</p>
-    <button (click)="login()">Login with Google</button>
-    <button (click)="loginEmailPassword('usuarionuevo@ejemplo.com', '1234567')">Login with email and password</button>
+    <p>Por favor inicia sesión.</p>
+    <form>
+      <input type="email" name="email" required="required" [(ngModel)]="login_email">
+      <input type="password" minlength="8" name="password" required="required" [(ngModel)]="login_password">
+      <input type="text" name="name" [(ngModel)]="login_displayName">
+      <button type="submit" (click)="loginEmailPassword()">Iniciar sesión</button>
+      <button type="submit" (click)="signUpEmailPassword()">Registrar</button>
+    </form>
+
+    <button (click)="login()">Login con Google</button>
+    <button (click)="loginFacebook()">Login con Facebook</button>
   </ng-template>
 
 

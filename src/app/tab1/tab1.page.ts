@@ -19,6 +19,10 @@ import { auth } from 'firebase/app';
 })
 export class Tab1Page {
 
+  login_email: string;
+  login_password: string;
+  login_displayName: string;
+
   users: any[] = [];
   currentUser: string = '';
   /* heroes: Observable<any[]>; */
@@ -79,19 +83,55 @@ export class Tab1Page {
   }
 
   login() {
-    this.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((user)=>{
-      this.firestore.collection('users').doc(user.user.uid).set({email: user.user.email, displayname:user.user.displayName, method: user.user.providerId, })
-      console.log(user);      
+    this.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((user) => {
+      this.firestore.collection('users').doc(user.user.uid).set({ email: user.user.email, displayname: user.user.displayName, method: user.user.providerId, })
+      console.log(user);
       this.ngOnInit();
     })
   }
-  loginEmailPassword(email, password) {
-    this.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-        console.log(user)
-      }).catch((error) => {
-        console.error(error);
-      })
+
+  loginFacebook() {
+    this.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((user) => {
+      this.firestore.collection('users').doc(user.user.uid).set({ email: user.user.email, displayname: user.user.displayName, method: user.user.providerId, })
+      console.log(user);
+      this.ngOnInit();
+    })
+  }
+
+  signUpEmailPassword() {
+    if (this.login_email !== undefined && this.login_email !== ''
+      && this.login_password !== undefined && this.login_password !== '') {
+      this.auth.createUserWithEmailAndPassword(this.login_email, this.login_password)
+        .then((userInfo) => {
+          if (this.login_displayName !== undefined) {
+            //let user = JSON.parse(JSON.stringify(userInfo.user));
+            let user = userInfo.user;
+            user.updateProfile({displayName: this.login_displayName});
+            //user.displayName = this.login_displayName;
+            //this.auth.updateCurrentUser(user);
+          }
+
+          this.firestore.collection('users').doc(userInfo.user.uid).set({ email: userInfo.user.email, displayname: userInfo.user.displayName, method: userInfo.user.providerId, })
+          console.log(userInfo);
+          this.ngOnInit();
+        }).catch((error) => {
+          console.error(error);
+        });
+    }
+  }
+
+  loginEmailPassword() {
+    if (this.login_email !== undefined && this.login_email !== ''
+      && this.login_password !== undefined && this.login_password !== '') {
+      this.auth.signInWithEmailAndPassword(this.login_email, this.login_password)
+        .then((user) => {
+          //this.firestore.collection('users').doc(user.user.uid).set({ email: user.user.email, displayname: user.user.displayName, method: user.user.providerId, })
+          console.log(user);
+          this.ngOnInit();
+        }).catch((error) => {
+          console.error(error);
+        });
+    }
   }
   logout() {
     this.auth.signOut();
