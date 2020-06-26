@@ -22,7 +22,7 @@ export class HeroesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getHeroes();
+    this.getHeroes();    
   }
 
   add(name: string, power: string, color: string): void {
